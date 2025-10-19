@@ -1,0 +1,16 @@
+[14-Oct-2025 05:27:34 UTC] PHP Warning:  require(/home/toomlk/qlanka/vendor/autoload.php): failed to open stream: No such file or directory in /home/toomlk/qlanka/artisan on line 10
+[14-Oct-2025 05:27:34 UTC] PHP Fatal error:  require(): Failed opening required '/home/toomlk/qlanka/vendor/autoload.php' (include_path='.:/opt/alt/php74/usr/share/pear') in /home/toomlk/qlanka/artisan on line 10
+[14-Oct-2025 05:27:42 UTC] PHP Warning:  require(/home/toomlk/qlanka/vendor/autoload.php): failed to open stream: No such file or directory in /home/toomlk/qlanka/artisan on line 10
+[14-Oct-2025 05:27:42 UTC] PHP Fatal error:  require(): Failed opening required '/home/toomlk/qlanka/vendor/autoload.php' (include_path='.:/opt/alt/php74/usr/share/pear') in /home/toomlk/qlanka/artisan on line 10
+[14-Oct-2025 13:38:52 UTC] PHP Warning:  require(/home/toomlk/qlanka/vendor/autoload.php): Failed to open stream: No such file or directory in /home/toomlk/qlanka/artisan on line 10
+[14-Oct-2025 13:38:52 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/toomlk/qlanka/vendor/autoload.php' (include_path='.:/opt/alt/php82/usr/share/pear:/opt/alt/php82/usr/share/php:/usr/share/pear:/usr/share/php') in /home/toomlk/qlanka/artisan:10
+Stack trace:
+#0 {main}
+  thrown in /home/toomlk/qlanka/artisan on line 10
+[14-Oct-2025 13:47:58 UTC] PHP Fatal error:  Uncaught RuntimeException: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/toomlk/qlanka/vendor/composer/platform_check.php:22
+Stack trace:
+#0 /home/toomlk/qlanka/vendor/composer/autoload_real.php(25): require()
+#1 /home/toomlk/qlanka/vendor/autoload.php(22): ComposerAutoloaderInit65f34bfc128d068e5d92240e026cb666::getLoader()
+#2 /home/toomlk/qlanka/artisan(10): require('/home/toomlk/ql...')
+#3 {main}
+  thrown in /home/toomlk/qlanka/vendor/composer/platform_check.php on line 22
