@@ -240,7 +240,7 @@
     <!-- Quiz Start Button -->
     <div class="fixed bottom-24 left-0 right-0 px-4 z-50 flex justify-center">
         <div class="w-full max-w-sm text-center">
-            <button wire:click="startQuiz" 
+            <button wire:click="showRegistrationForm" 
                     class="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold py-3 px-4 rounded-lg hover:from-purple-600 hover:to-pink-600 transform hover:scale-105 transition-all duration-200 shadow-lg text-base mb-2">
                 Quiz ආරම්භ කරන්න
             </button>
@@ -260,49 +260,22 @@
         </div>
     </div>
 
-    <!-- Mobile Number Modal -->
-    @if($showMobileModal)
-    <div class="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4">
-        <div class="bg-gray-900 rounded-2xl w-full max-w-sm md:max-w-md lg:max-w-lg max-h-[90vh] overflow-y-auto border border-gray-700 relative">
-            <div class="p-6">
-                <div class="text-center mb-6">
-                    <h2 class="text-xl font-bold text-white">Enter Your Mobile Number</h2>
-                    <p class="text-white/70 text-sm mt-2">We'll check if you're already registered</p>
-                </div>
-                <button wire:click="$set('showMobileModal', false)" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">&times;</button>
-                
-                <form wire:submit.prevent="checkMobile">
-                    <div class="space-y-4">
-                        <div>
-                            <label for="mobileNumber" class="block text-sm font-medium text-gray-300 mb-1 text-center">Mobile Number</label>
-                            <input type="tel" wire:model="mobileNumber" required 
-                                   class="w-full px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white placeholder-gray-400 text-sm text-center"
-                                   placeholder="07XXXXXXXX" maxlength="10">
-                        </div>
-                    </div>
-                    
-                    <div class="mt-5">
-                        <button type="submit" 
-                                class="w-full px-4 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-200 font-semibold text-base">
-                            Continue
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    @endif
-
     <!-- Registration Modal -->
     @if($showRegistrationModal)
     <div class="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4">
-        <div class="bg-gray-900 rounded-2xl w-full max-w-sm md:max-w-md lg:max-w-lg max-h-[90vh] overflow-y-auto border border-gray-700">
+        <div class="bg-gray-900 rounded-2xl w-full max-w-sm md:max-w-md lg:max-w-lg max-h-[90vh] overflow-y-auto border border-gray-700 relative">
             <div class="p-6">
+                <button wire:click="$set('showRegistrationModal', false)" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">&times;</button>
+                
                 <div class="text-center mb-6">
                     <h2 class="text-xl font-bold text-white">Register for Quiz</h2>
                 </div>
-                
-                
+
+                @if($errorMessage)
+                <div class="mb-4 p-3 bg-red-900/40 border border-red-500/40 rounded-lg">
+                    <p class="text-red-200 text-sm text-center">{{ $errorMessage }}</p>
+                </div>
+                @endif
 
                 <!-- Registration Form -->
                 <form wire:submit.prevent="submitRegistration">
@@ -318,7 +291,12 @@
                             <label for="mobile" class="block text-sm font-medium text-gray-300 mb-1 text-center">Mobile Number</label>
                             <input type="tel" wire:model="mobileNumber" required 
                                    class="w-full px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white placeholder-gray-400 text-sm text-center"
-                                   placeholder="07XXXXXXXX" maxlength="10" readonly>
+                                   placeholder="07XXXXXXXX" 
+                                   maxlength="10" 
+                                   pattern="0[0-9]{9}"
+                                   title="Mobile number must start with 0 and be exactly 10 digits"
+                                   oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                            @error('mobileNumber') <span class="text-red-400 text-xs mt-1 block">{{ $message }}</span> @enderror
                         </div>
                         
 <div>
@@ -358,7 +336,7 @@
                     <div class="mt-5">
                         <button type="submit" id="submitBtn"
                                 class="w-full px-4 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-200 font-semibold text-base disabled:opacity-50 disabled:cursor-not-allowed">
-                            <span id="btnText">Start Quiz</span>
+                            <span id="btnText">Continue</span>
                             <span id="loadingSpinner" class="hidden">
                                 <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -366,6 +344,52 @@
                                 </svg>
                                 Loading...
                             </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @endif
+
+    <!-- OTP Verification Modal -->
+    @if($showOtpModal)
+    <div class="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4">
+        <div class="bg-gray-900 rounded-2xl w-full max-w-sm md:max-w-md lg:max-w-lg max-h-[90vh] overflow-y-auto border border-gray-700 relative">
+            <div class="p-6">
+                <button wire:click="$set('showOtpModal', false)" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">&times;</button>
+                
+                <div class="text-center mb-6">
+                    <h2 class="text-xl font-bold text-white">Verify OTP</h2>
+                    <p class="text-white/70 text-sm mt-2">Enter the OTP code sent to {{ $mobileNumber }}</p>
+                </div>
+
+                @if($errorMessage)
+                <div class="mb-4 p-3 bg-red-900/40 border border-red-500/40 rounded-lg">
+                    <p class="text-red-200 text-sm text-center">{{ $errorMessage }}</p>
+                </div>
+                @endif
+
+                <!-- OTP Form -->
+                <form wire:submit.prevent="verifyOtp">
+                    <div class="space-y-4">
+                        <div>
+                            <label for="otp" class="block text-sm font-medium text-gray-300 mb-1 text-center">OTP Code</label>
+                            <input type="text" wire:model="otpCode" required 
+                                   class="w-full px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white placeholder-gray-400 text-2xl text-center tracking-widest font-mono"
+                                   placeholder="000000" 
+                                   maxlength="6"
+                                   inputmode="numeric"
+                                   oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                   autocomplete="one-time-code">
+                            @error('otpCode') <span class="text-red-400 text-xs mt-1 block text-center">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+                    
+                    <div class="mt-5">
+                        <button type="submit"
+                                class="w-full px-4 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-200 font-semibold text-base disabled:opacity-50 disabled:cursor-not-allowed">
+                            Verify & Start Quiz
                         </button>
                     </div>
                 </form>
