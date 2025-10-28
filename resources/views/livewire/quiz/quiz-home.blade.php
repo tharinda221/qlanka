@@ -161,6 +161,15 @@
         <!-- <h1 class="text-white text-lg font-semibold">Welcome</h1> -->
     </div>
 
+    <!-- Success Message -->
+    @if(session('message'))
+    <div class="px-4 mb-6 relative z-10">
+        <div class="bg-green-500/20 backdrop-blur-lg border border-green-500/40 rounded-lg p-4 mx-auto max-w-xl">
+            <p class="text-green-200 text-center text-sm">{{ session('message') }}</p>
+        </div>
+    </div>
+    @endif
+
     <!-- User Profile Card -->
     <div class="px-4 mb-6 hidden">
         <div class="bg-white rounded-2xl shadow-xl p-6 mx-auto max-w-sm">

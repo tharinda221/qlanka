@@ -6,6 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title ?? 'Quiz' }}</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    @livewireStyles
     <script>
         // Force light theme only
         document.documentElement.classList.remove('dark');
@@ -45,5 +46,7 @@
             </a>
         </div>
     </div>
+    
+    @livewireScripts
 </body>
 </html>
