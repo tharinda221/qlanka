@@ -271,9 +271,9 @@
 
     <!-- Registration Modal -->
     @if($showRegistrationModal)
-    <div class="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4">
-        <div class="bg-gray-900 rounded-2xl w-full max-w-sm md:max-w-md lg:max-w-lg max-h-[90vh] overflow-y-auto border border-gray-700 relative">
-            <div class="p-6">
+    <div class="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4 pb-24">
+        <div class="bg-gray-900 rounded-2xl w-full max-w-sm md:max-w-md lg:max-w-lg max-h-[85vh] overflow-y-auto border border-gray-700 relative">
+            <div class="p-6 pb-8">
                 <button wire:click="$set('showRegistrationModal', false)" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">&times;</button>
                 
                 <div class="text-center mb-6">
@@ -290,14 +290,14 @@
                 <form wire:submit.prevent="submitRegistration">
                     <div class="space-y-4">
                         <div>
-                            <label for="name" class="block text-sm font-medium text-gray-300 mb-1 text-center">Full Name</label>
+                            <label for="name" class="block text-sm font-medium text-gray-300 mb-1 text-center">ඔබේ නම</label>
                             <input type="text" wire:model="name" required 
                                    class="w-full px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white placeholder-gray-400 text-sm text-center"
                                    placeholder="Enter your full name">
                         </div>
                         
                         <div>
-                            <label for="mobile" class="block text-sm font-medium text-gray-300 mb-1 text-center">Mobile Number</label>
+                            <label for="mobile" class="block text-sm font-medium text-gray-300 mb-1 text-center">ඔබේ දුරකථන අංකය</label>
                             <input type="tel" wire:model="mobileNumber" required 
                                    class="w-full px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white placeholder-gray-400 text-sm text-center"
                                    placeholder="07XXXXXXXX" 
@@ -309,7 +309,7 @@
                         </div>
                         
 <div>
-                            <label for="city" class="block text-sm font-medium text-gray-300 mb-1 text-center">City</label>
+                            <label for="city" class="block text-sm font-medium text-gray-300 mb-1 text-center">ඔබේ නගරය තෝරන්න</label>
                             <select wire:model="city" required 
                                     class="w-full px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white text-sm text-center">
                                 <option value="">Select your city</option>
@@ -345,7 +345,7 @@
                     <div class="mt-5">
                         <button type="submit" id="submitBtn"
                                 class="w-full px-4 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-200 font-semibold text-base disabled:opacity-50 disabled:cursor-not-allowed">
-                            <span id="btnText">Continue</span>
+                            <span id="btnText">මෙය ඔබා  ඉදිරියට යන්න</span>
                             <span id="loadingSpinner" class="hidden">
                                 <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -354,6 +354,15 @@
                                 Loading...
                             </span>
                         </button>
+                        
+                        <!-- Subscription Details -->
+                        <div class="mt-3 text-center">
+                            <p class="text-white/60 text-xs leading-relaxed">
+                                Mobitel prepaid Rs.7 daily+Tax<br>
+                                Mobitel postpaid Rs.210 monthly+Tax<br>
+                                Others Weekly Rs.7+Tax
+                            </p>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -370,7 +379,7 @@
                 
                 <div class="text-center mb-6">
                     <h2 class="text-xl font-bold text-white">Verify OTP</h2>
-                    <p class="text-white/70 text-sm mt-2">Enter the OTP code sent to {{ $mobileNumber }}</p>
+                    <p class="text-white/70 text-sm mt-2">ඔබගේ දුරකථන අංකයට {{ $mobileNumber }} ලැබුනු අංක 6ක කෝඩ් එක ඇතුලත් කරන්න</p>
                 </div>
 
                 @if($errorMessage)
@@ -398,7 +407,7 @@
                     <div class="mt-5">
                         <button type="submit"
                                 class="w-full px-4 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-200 font-semibold text-base disabled:opacity-50 disabled:cursor-not-allowed">
-                            Verify & Start Quiz
+                            ආරම්භ කරන්න
                         </button>
                     </div>
                 </form>
